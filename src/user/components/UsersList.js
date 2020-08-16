@@ -8,9 +8,9 @@ const UsersList = props =>{
         </div>
     }
     return <ul>
-        {props.items.map(user=>{
-            return <UserItem/>
-        })}
+        {props.items.map(user=>(
+             <UserItem key= { user.id } id={ user.id }/>
+        ))}
     </ul>
 }
 export default UsersList 
