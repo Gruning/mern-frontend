@@ -23,7 +23,9 @@ const ModalOverlay = props =>{
 }
 
 const Modal = props =>{
-
+    return <Reac.Fragment>
+        {props.show && <Backdrop onclick={props.onCancel}/>}
+    </Reac.Fragment>
 }
 
 export default modals
