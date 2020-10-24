@@ -15,10 +15,10 @@ const DUMMY_PLACES =[
             creator:'u1',
         },
         {
-            id:'p1',
+            id:'p2',
             title:'Empire State Building',
             description:'the same building',
-            imageUrl:'https://upload.wikimedia.org/wikipedia/commons/1/10/Empire_State_Building_%28aerial_view%29.jpg',
+            imageUrl:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Empire_State_Building%2C_New_York%2C_NY.jpg/256px-Empire_State_Building%2C_New_York%2C_NY.jpg",
             address:'20 W 34th St, New York, NY 10001, United States',
             location:{
                 lat:40.7484405,
