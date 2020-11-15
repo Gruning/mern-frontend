@@ -27,7 +27,7 @@ const formReducer =(state, action)=>{
             }
         default: return state
     }
-}
+} 
 
 const NewPlace =()=>{
     const [formState,dispatch] = useReducer(formReducer,{
@@ -44,7 +44,11 @@ const NewPlace =()=>{
         isValid:false
     })
     const inputHandler= useCallback((id,value,isValid)=>{
-        dispatch({type:'INPUT_CHANGE',value:value, isValid:isValid,inputId:id })
+        dispatch({
+            type:'INPUT_CHANGE',
+            value:value, 
+            isValid:isValid,inputId:id 
+        })
     },[])
 
     return <form className='place-form'>
