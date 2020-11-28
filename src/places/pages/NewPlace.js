@@ -46,8 +46,9 @@ const NewPlace =()=>{
     const inputHandler= useCallback((id,value,isValid)=>{
         dispatch({
             type:'INPUT_CHANGE',
-            value:value, 
-            isValid:isValid,inputId:id 
+            value, 
+            isValid,
+            inputId:id 
         })
     },[])
 
