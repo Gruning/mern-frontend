@@ -48,7 +48,21 @@ const UpdatePlace = ()=>{
             validators={[VALIDATOR_REQUIRE()]}
             errorText='Enter a valid title'
             onInput={()=>{}}
+            value= {indentifiedPlace.title}
+            valid={true}
         />
+        <Input
+            id="description"
+            element='textarea'
+            label='Description'
+            validators={[VALIDATOR_MINLENGTH]}
+            errorText='minimum 5 characters'
+            onInput={()=>{}}
+            value= {indentifiedPlace.description}
+            valid={true}
+        />
+        <Button type='submit' disabled={true}>Update</Button>
+        
     </form>
 }
 
