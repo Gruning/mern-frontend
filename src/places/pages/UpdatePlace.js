@@ -47,42 +47,42 @@ const UpdatePlace = () => {
     const [formState, inputHandler, setFormData] = useForm(
     {
         title: {
-        value: "",
-        isValid: false,
+        value: '',//identifiedPlace.title,
+        isValid: true,
         },
         description: {
-        value: "",
+        value: '',//identifiedPlace.description,
         isValid: false,
         },
     },
     false
     )
 
-    const indentifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
-    console.log(indentifiedPlace)
+    const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
+    console.log(identifiedPlace)
     useEffect(() => {
     setFormData(
             {
             title: {
-                value: indentifiedPlace.title,
-                isValid: true,
+                value: identifiedPlace.title,
+                isValid: false,
                 },
             description: {
-                value: indentifiedPlace.description,
-                isValid: true,
+                value: identifiedPlace.description,
+                isValid: false,
                 },
             },
             true
         )
         setIsLoading(false)
-    }, [setFormData, indentifiedPlace])
+    }, [setFormData, identifiedPlace])
 
   const placeUpdateSubmitHandler = (event) => {
     event.preventDefault()
     console.log(formState.inputs);
   }
 
-    if (!indentifiedPlace) {
+    if (!identifiedPlace) {
         return (
         <div className="center">
         <h2>Clould Find no Place</h2>
@@ -90,7 +90,7 @@ const UpdatePlace = () => {
         );
     }
 
-  if (!indentifiedPlace) {
+  if (!identifiedPlace) {
       return <div className='center'>
           <h2>Loading</h2>
       </div>
