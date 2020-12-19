@@ -36,6 +36,7 @@ const DUMMY_PLACES =[
 const UpdatePlace = ()=>{
     const placeId = useParams().placeId
     const indentifiedPlace = DUMMY_PLACES.find(p => p.id === placeId)
+    
     const [formState, inputHandler]=useForm({
         title:{
             value : indentifiedPlace.title,
