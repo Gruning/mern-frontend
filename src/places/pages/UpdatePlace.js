@@ -35,16 +35,28 @@ const DUMMY_PLACES =[
 
 const UpdatePlace = ()=>{
     const placeId = useParams().placeId
-    const indentifiedPlace = DUMMY_PLACES.find(p => p.id === placeId)
     
-    const [formState, inputHandler]=useForm({
+    const [formState, inputHandler, setFormData]=useForm({
         title:{
-            value : indentifiedPlace.title,
-            isValid: true
+            value : '',
+            isValid: false
         },
         description:{
-            value : indentifiedPlace.description,
-            isValid:true
+            value : '',
+            isValid:false
+        }
+    },false)
+    
+    const indentifiedPlace = DUMMY_PLACES.find(p => p.id === placeId)
+
+    setFormData({
+            title:{
+            value : '',
+            isValid: false
+        },
+        description:{
+            value : '',
+            isValid:false
         }
     },true)
 
