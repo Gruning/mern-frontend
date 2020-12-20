@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 
 import Input from "../../shared/components/FormElements/Input"
 import Button from "../../shared/components/FormElements/Button"
+import Card from '../../shared/components/UIElements/Card'
 import {
     VALIDATOR_REQUIRE,
      VALIDATOR_MINLENGTH,
@@ -27,7 +28,7 @@ const DUMMY_PLACES = [
   },
   {
     id: "p2",
-    title: "Empire State Building",
+    title: "Emp. State",
     description: "the same building",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Empire_State_Building%2C_New_York%2C_NY.jpg/256px-Empire_State_Building%2C_New_York%2C_NY.jpg",
@@ -59,19 +60,21 @@ const UpdatePlace = () => {
         
         const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
         useEffect(() => {
-            setFormData(
+            if (identifiedPlace) {
+              setFormData(
                 {
-                    title: {
-                        value: identifiedPlace.title,
-                        isValid: true,
-                    },
-                    description: {
-                        value: identifiedPlace.description,
-                        isValid: true,
-                    },
+                  title: {
+                      value: identifiedPlace.title,
+                      isValid: true,
+                  },
+                  description: {
+                      value: identifiedPlace.description,
+                      isValid: true,
+                  },
                 },
                 true
-                )
+              )
+            }
                 setIsLoading(false)
             }, [setFormData, identifiedPlace])
             
@@ -82,9 +85,11 @@ const UpdatePlace = () => {
             
     if (!identifiedPlace) {
         return (
-        <div className="center">
-            <h2>Clould Find no Place</h2>
-        </div>
+          <div className="center">
+            <Card>
+              <h2>Clould Find no Place</h2>
+            </Card>
+          </div>
         );
     }
             
