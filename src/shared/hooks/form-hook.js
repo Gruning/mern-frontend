@@ -20,12 +20,12 @@ const formReducer =(state, action)=>{
                     [action.inputId]:{value:action.value, isValid:action.isValid}
                 },
                 isValid : formIsValid
-            }
+            };
         case 'SET_DATA':
             return {
                 inputs: action.inputs,
                 isValid: action.formIsValid
-            }
+            };
         default: return state
     }
 } 

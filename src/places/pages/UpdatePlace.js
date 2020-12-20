@@ -42,85 +42,83 @@ const DUMMY_PLACES = [
 
 const UpdatePlace = () => {
     const placeId = useParams().placeId
-    const [isLoading,setIsLoading] = useState(true)
-
+    const [isLoading,setIsLoading] = useState(true)        
     const [formState, inputHandler, setFormData] = useForm(
-    {
-        title: {
-        value: '',//identifiedPlace.title,
-        isValid: true,
-        },
-        description: {
-        value: '',//identifiedPlace.description,
-        isValid: false,
-        },
-    },
-    false
-    )
-
-    const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
-    console.log(identifiedPlace)
-    useEffect(() => {
-    setFormData(
-            {
+        {
             title: {
-                value: identifiedPlace.title,
+                value: '',
                 isValid: false,
-                },
-            description: {
-                value: identifiedPlace.description,
-                isValid: false,
-                },
             },
-            true
+            description: {
+                value: '',
+                isValid: false,
+            },
+        },
+        false
         )
-        setIsLoading(false)
-    }, [setFormData, identifiedPlace])
-
-  const placeUpdateSubmitHandler = (event) => {
-    event.preventDefault()
-    console.log(formState.inputs);
-  }
-
+        
+        const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
+        useEffect(() => {
+            setFormData(
+                {
+                    title: {
+                        value: identifiedPlace.title,
+                        isValid: true,
+                    },
+                    description: {
+                        value: identifiedPlace.description,
+                        isValid: true,
+                    },
+                },
+                true
+                )
+                setIsLoading(false)
+            }, [setFormData, identifiedPlace])
+            
+            const placeUpdateSubmitHandler = (event) => {
+                event.preventDefault()
+                console.log(formState.inputs);
+            }
+            
     if (!identifiedPlace) {
         return (
         <div className="center">
-        <h2>Clould Find no Place</h2>
+            <h2>Clould Find no Place</h2>
         </div>
         );
     }
-
-  if (!identifiedPlace) {
-      return <div className='center'>
-          <h2>Loading</h2>
-      </div>
-  }
+            
+    if (isLoading) {
+        return <div className='center'>
+        <h2>Loading</h2>
+        </div>
+    }
   return (
-    <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
-      <Input
-        id="title"
-        element="input"
-        type="text"
-        label="Title"
-        validators={[VALIDATOR_REQUIRE()]}
-        errorText="Enter a valid title"
-        onInput={inputHandler}
-        initialValue={formState.inputs.title.value}
-        initialValid={formState.inputs.title.isValid}
-      />
-      <Input
-        id="description"
-        element="textarea"
-        label="Description"
-        validators={[VALIDATOR_MINLENGTH(5)]}
-        errorText="Enter a valid description (minimum 5 characters)"
-        onInput={inputHandler}
-        initialValue={formState.inputs.description.value}
-        initialValid={formState.inputs.description.isValid}
-      />
-      <Button type="submit" disabled={!formState.isValid}>
-        Update
-      </Button>
+     <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+        <Input
+            id="title"
+            element="input"
+            type="text"
+            label="Title"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Enter a valid title"
+            onInput={inputHandler}
+            initialValue={formState.inputs.title.value}
+            initialValid={formState.inputs.title.isValid}
+        />
+        <Input
+            id="description"
+            element="textarea"
+            label="Description"
+            validators={[VALIDATOR_MINLENGTH(5)]}
+            errorText="Enter a valid description (minimum 5 characters)"
+            onInput={inputHandler}
+            initialValue={formState.inputs.description.value}
+            initialValid={formState.inputs.description.isValid}
+        />
+        <Button type="submit" disabled={!formState.isValid}>
+            Update
+        </Button>
     </form>
   )
 }
