@@ -23,7 +23,7 @@ const Auth = ()=>{
             isValid:false
         }
     },false)
-    const switchModeHandler = e =>{
+    const switchModeHandler = () =>{
         if (!isLoginMode) {
             setFormData({
                 ...formState.inputs,
@@ -79,7 +79,9 @@ const Auth = ()=>{
                 {isLoginMode? 'Login': 'Signup'}
             </Button>
         </form>
-        <Button inverse onClick={switchModeHandler}>Switch to {isLoginMode? 'Signup': 'Login'}</Button>
+        <Button inverse onClick={switchModeHandler}>
+            Switch to {isLoginMode? 'Signup': 'Login'}
+        </Button>
     </Card>
 }
 
