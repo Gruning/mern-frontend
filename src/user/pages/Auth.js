@@ -21,11 +21,14 @@ const Auth = ()=>{
             isValid:false
         }
     },false)
-
+    const authSubmitHandler = e =>{
+        e.preventDefault()
+        console.log(formState.inputs)
+    }
     return <Card className='authentication'>
         <h2>Login required</h2>
         <hr/>
-        <form>
+        <form onSubmit={authSubmitHandler}>
             <Input 
                 element='input' 
                 id='email' 
