@@ -38,7 +38,7 @@ const Auth = ()=>{
                 }
             },false)
         }
-        setIsLoginMode = (prevMode =>!prevMode)
+        setIsLoginMode(prevMode =>!prevMode)
     }
     const authSubmitHandler = e =>{
         e.preventDefault()
