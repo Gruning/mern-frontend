@@ -6,7 +6,7 @@ import Card from '../../shared/components/UIElements/Card'
 
 const UsersList = props =>{  
     console.log(props)
-    console.log(props.items.lengh)
+    console.log(props.items.length)
     if (props.items.lengh === 0) {
         return (<div className="center">
             <Card>
