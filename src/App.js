@@ -30,8 +30,13 @@ const App =() => {
         <Route path='/:userId/places' exact>
           <UserPlaces/>
         </Route>
-
-        <Redirect to='/auth'/>
+        <Route path="/places/new" exact>
+          <NewPlace />
+        </Route>
+        <Route path="/places/:placeId" exact>
+          <UpdatePlace/>
+        </Route>
+        <Redirect to='/'/>
       </Switch>
     )
   } else {
@@ -46,13 +51,7 @@ const App =() => {
         <Route path='/auth'>
           <Auth/>
         </Route>
-        <Route path="/places/new" exact>
-          <NewPlace />
-        </Route>
-        <Route path="/places/:placeId" exact>
-          <UpdatePlace/>
-        </Route>
-        <Redirect to='/'/>
+        <Redirect to='/auth'/>
       </Switch>
     )
   }
