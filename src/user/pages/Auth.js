@@ -48,21 +48,25 @@ const Auth = ()=>{
         if(isLoginMode){
 
         }else{
-
-            fetch('http://localhost:5000/api/users/signup',{
-                method:'POST',
-                headers:{
-                    'Content-Type':'Text/Json'
-                },
-                    body: JSON.stringify({
-                    name: formState.inputs.name.value,
-                    email: formState.inputs.email.value,
-                    password: formState.inputs.password.value
+            try{
+    
+                const response= await fetch('http://localhost:5000/api/users/signup',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'Text/Json'
+                    },
+                        body: JSON.stringify({
+                        name: formState.inputs.name.value,
+                        email: formState.inputs.email.value,
+                        password: formState.inputs.password.value
+                    })
                 })
-            })
 
-            const responseData= await response.Json()
-            console.log(responseData)
+                const responseData= await response.Json()
+                console.log(responseData)
+            }catch(err){
+                console.log(err)    
+            }
         }   
 
 
