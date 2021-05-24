@@ -77,8 +77,6 @@ const Auth = ()=>{
             }
         }   
 
-
-
     }
     return <Card className='authentication'>
         {isLoading && <LoadingSpinner asOverlay/>}
