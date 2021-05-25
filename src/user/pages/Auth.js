@@ -18,8 +18,6 @@ import './Auth.css'
 const Auth = ()=>{
     const auth = useContext(AuthContext)
     const [isLoginMode,setIsLoginMode]=useState(true)
-    
-    
     const {isLoading,error,sendRequest,clearError}= useHttpClient()
     const [formState, inputHandler, setFormData] = useForm({
         email:{
@@ -50,8 +48,8 @@ const Auth = ()=>{
     }
     const authSubmitHandler = async e =>{
         e.preventDefault()
-
         if(isLoginMode){
+            try {
                 await sendRequest(
                     'http://localhost:5000/api/users/login',
                     'POST',
@@ -63,44 +61,32 @@ const Auth = ()=>{
                         'Content-Type':'application/Json'
                     }
                 )
-
                 auth.login()
+            } catch (err) {}
+
         }else{
             try{
-
-                const response= await fetch('http://localhost:5000/api/users/signup',{
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/Json'
-                    },
-                    body: JSON.stringify({
+                await sendRequest(
+                    'http://localhost:5000/api/users/signup',
+                    'POST',
+                    JSON.stringify({
                         name: formState.inputs.name.value,
                         email: formState.inputs.email.value,
                         password: formState.inputs.password.value
-                    })
-                })
-
-                const responseData= await response.json()
-                if(!response.ok){
-                    throw new Error(responseData.message) 
-                }
-                setIsLoading(false)
+                    }),
+                    {
+                        'Content-Type':'application/Json'
+                    },
+                )
                 auth.login()
-            }catch(err){
-                console.log(err)
-                setIsLoading(false)
-                setError(err.message|| 'Error authenticating')    
-            }
+            }catch(err){}
         }   
 
     }
 
-    const errorHandler =()=>{
-        setError(null)
-    }
 
     return <React.Fragment>
-    <ErrorModal error={error} onClear={errorHandler}/> 
+    <ErrorModal error={error} onClear={clearError}/> 
     <Card className='authentication'>
         {isLoading && <LoadingSpinner asOverlay/>}
         <h2>Login required</h2>
