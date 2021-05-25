@@ -1,4 +1,3 @@
-import { set } from "lodash"
 import { useState ,useCallback,useRef} from "react"
 
 export const useHttpClient = ()=> {
@@ -13,23 +12,22 @@ export const useHttpClient = ()=> {
         headers={}
         )=>{
         setIsLoading(true)
-        try {
-            
+        try {            
             const response= await fetch(url,{
                 method,
                 body,
                 headers
             })
-
             const responseData = await response.json()
-
             if (!response.ok) {
                 throw new Error(responsedata.message)
             }
+            setIsLoading(false)
         } catch (err) {
             setError(err.message)
+            setIsLoading(false)
+            throw err
         }
-        setIsLoading(false)
     },
     []
     )
