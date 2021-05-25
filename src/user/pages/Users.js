@@ -7,7 +7,6 @@ const Users= ()=>{
     const [isLoading,setIsLoading]=useState(false)
     const [error,setError]= useState() 
     const [loadedUsers,setLoadedUsers]= useState() 
-    const USERS = null
 
     useEffect(()=>{
         const sendRequest = async ()=> {
