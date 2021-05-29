@@ -5,7 +5,8 @@ import Button from '../../shared/components/FormElements/Button'
 import { 
     VALIDATOR_MINLENGTH, 
     VALIDATOR_REQUIRE } from '../../shared/util/validators'
-import { useForm } from "../../shared/hooks/form-hook";
+import { useForm } from "../../shared/hooks/form-hook"
+import { useHttpClient } from '../../shared/hooks/http-hook'
 
 const NewPlace =()=>{
     const [formState,inputHandler]= useForm(
@@ -29,7 +30,16 @@ const NewPlace =()=>{
 
     const placeSubmitHandler = event =>{
         event.preventDefault()
-        console.log(formState.inputs) //send to backend
+        sendRequest(
+            'http://localhost:5000/api/places',
+            'POST',
+            JSON.stringify({
+                title:formState.inputs.title.value,
+                description:formState.inputs.description.value,
+                address:formState.inputs.address.value,
+                creator:''
+            })
+            )
     }
 
     return <form className='place-form' onSubmit={placeSubmitHandler}>
