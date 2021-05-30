@@ -84,7 +84,6 @@ const Auth = ()=>{
 
     }
 
-
     return <React.Fragment>
     <ErrorModal error={error} onClear={clearError}/> 
     <Card className='authentication'>
