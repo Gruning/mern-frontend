@@ -20,7 +20,16 @@ const UserPlaces=()=>{
         }
         fetchPlaces()
     },[sendRequest, userId])
-    return <PlaceList items={loadedPlaces}/>
+    return <React.Fragment>
+        <ErrorModal error={error} onClear={clearError}/>
+        {isLoading &&
+        <div className="center">
+            <LoadingSpinner/>
+        </div>
+        }
+        {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces}/>}
+    </React.Fragment> 
+
 }
 
 export default UserPlaces
