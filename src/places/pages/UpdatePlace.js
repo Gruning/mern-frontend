@@ -8,42 +8,18 @@ import {
     VALIDATOR_REQUIRE,
      VALIDATOR_MINLENGTH,
 } from "../../shared/util/validators"
-import "./PlaceForm.css"
+
 
 import { useForm } from "../../shared/hooks/form-hook"
+import { useHttpClient } from "../../shared/hooks/http-hook"
+import "./PlaceForm.css"
 
-const DUMMY_PLACES = [
-  {
-    id: "p1",
-    title: "Empire State Building",
-    description: "a famous Building",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/1/10/Empire_State_Building_%28aerial_view%29.jpg",
-    address: "20 W 34th St, New York, NY 10001, United States",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878531,
-    },
-    creator: "u1",
-  },
-  {
-    id: "p2",
-    title: "Emp. State",
-    description: "the same building",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Empire_State_Building%2C_New_York%2C_NY.jpg/256px-Empire_State_Building%2C_New_York%2C_NY.jpg",
-    address: "20 W 34th St, New York, NY 10001, United States",
-    location: {
-      lat: 40.7484405,
-      lng: -73.9878531,
-    },
-    creator: "u2",
-  },
-]
+const DUMMY_PLACES = []
 
 const UpdatePlace = () => {
+    const {isLoading, error, sendRequest, clearError} = useHttpClient()
+    const [loadedPlace, setLoadedPlace]= useState() 
     const placeId = useParams().placeId
-    const [isLoading,setIsLoading] = useState(true)        
     const [formState, inputHandler, setFormData] = useForm(
         {
             title: {
@@ -57,8 +33,19 @@ const UpdatePlace = () => {
         },
         false
         )
+       
+        useEffect(()=>{
+          const fetchPlace = async ()=>{
+            try {
+              const responseData = await sendRequest(
+                `http://localhost:5000/api/places/${placeId}`
+                )
+                setLoadedPlace(responseData.place)
+            } catch (err) {}
+          }
+          fetchPlace()
+        },[sendRequest, placeId])
         
-        const identifiedPlace = DUMMY_PLACES.find((p) => p.id === placeId)
         useEffect(() => {
             if (identifiedPlace) {
               setFormData(
