@@ -114,8 +114,8 @@ const Auth = ()=>{
                 id='password' 
                 type='password' 
                 label='Password'
-                validators={[VALIDATOR_MINLENGTH(5)]} 
-                errorText='Enter a valid password. At least 5 charcaters'
+                validators={[VALIDATOR_MINLENGTH(6)]} 
+                errorText='Enter a valid password. At least 6 charcaters'
                 onInput={inputHandler}
             />
             <Button type='submit' disabled={!formState.isValid}>
