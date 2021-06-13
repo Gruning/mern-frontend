@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import Input from "../../shared/components/FormElements/Input"
 import Button from "../../shared/components/FormElements/Button"
 import Card from '../../shared/components/UIElements/Card'
-import loadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner'
 import ErrorModal from "../../shared/components/UIElements/ErrorModal"
 import {
     VALIDATOR_REQUIRE,
