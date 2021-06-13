@@ -18,6 +18,8 @@ import './PlaceForm.css'
 
 const UpdatePlace = () => {
     const auth = useContext(AuthContext)
+    console.log('--------userId')
+    console.log(auth.userId)
     const { isLoading, error, sendRequest, clearError } = useHttpClient()
     const [loadedPlace, setLoadedPlace] = useState()
     const placeId = useParams().placeId
@@ -62,13 +64,14 @@ const UpdatePlace = () => {
     }, [sendRequest, placeId, setFormData])
 
     const placeUpdateSubmitHandler = async (event) => {
+        console.log('-----placeUpdateSubmitHandler')
         event.preventDefault()
         try {
             console.log('-------PATCH-----')
             console.log(formState.inputs.title.value)
             console.log(formState.inputs.description.value)
             await sendRequest(
-                `http://localhost:500/api/places/${placeId}`,
+                `http://localhost:5000/api/places/${placeId}`,
                 'PATCH',
                 JSON.stringify({
                     title: formState.inputs.title.value,
@@ -78,7 +81,8 @@ const UpdatePlace = () => {
                     'Content-Type': 'application/json',
                 }
             )
-            history.push('/' + auth.userId + '/places')
+            history.push('/' + '60a99b432c76b3095f568931' + '/places')
+            //history.push('/' + auth.userId + '/places')
         } catch (err) {}
     }
     if (isLoading) {
