@@ -1,16 +1,26 @@
 import React ,{useRef} from 'react'
 import Button from './Button'
-import './imageUpload.css'
+import './ImageUpload.css'
 
-const imageUpload = props => {
-    const pickImageHandler =() => {}
-const filePickerRef = useRef()
+const ImageUpload = props => {
+    const filePickerRef = useRef()
+
+    const pickedHandler = event =>{
+        console.log(event.target)
+    }
+
+    const pickImageHandler =() => {
+        filePickerRef.current.click()
+    }
+
     return <div className="form-control">
         <input 
-        id ={props.id} 
-        style={{display:none}} 
+        id ={props.id}
+        ref={filePickerRef} 
+        style={{display:'none'}} 
         type="file" 
-        accept=".jpg,.png,.jpeg" 
+        accept=".jpg,.png,.jpeg"
+        onChange={pickedHandler} 
         />
         <div className={`image-upload ${props.center && 'center'}`} >
             <div className='image-upload__preview'>
@@ -20,4 +30,4 @@ const filePickerRef = useRef()
         </div>
     </div>
 }
-export default imageUpload
+export default ImageUpload
