@@ -11,7 +11,11 @@ const ImageUpload = props => {
         if (!file) {
            return 
         }
-        
+       const fileReader = new FileReader()
+       fileReader.onload=()=>{
+           setPreviewUrl(fileReader.result)
+       }
+       fileReader.readAsDataURL(file)
     },[file])
 
     const filePickerRef = useRef()
@@ -46,10 +50,12 @@ const ImageUpload = props => {
         />
         <div className={`image-upload ${props.center && 'center'}`} >
             <div className='image-upload__preview'>
-                <img src='' alt='Preview'/>
+                {previewUrl && <img src={previewUrl} alt='Preview'/>}
+                {!previewUrl && <p>Pick an image</p>}
             </div>
             <Button type='button' onClick={pickImageHandler}>Pick Image</Button>
         </div>
+        {!previewUrl && <p>{props.errorText}</p>}
     </div>
 }
 export default ImageUpload
