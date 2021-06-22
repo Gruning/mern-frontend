@@ -34,7 +34,6 @@ const PlaceItem = props =>{
         } catch (err) {}
     }
 
-
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError}/>
