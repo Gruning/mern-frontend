@@ -71,7 +71,7 @@ const Auth = ()=>{
                         'Content-Type':'application/Json'
                     }
                 )
-                auth.login(responseData.user.id)
+                auth.login(responseData.userId, responseData.token)
             } catch (err) {}
 
         }else{
@@ -88,7 +88,7 @@ const Auth = ()=>{
                     'POST',
                     formData
                 )
-                auth.login(responseData.user.id)
+                auth.login(responseData.userId, responseData.token)
             }catch(err){}
         }   
 
