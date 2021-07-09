@@ -1,4 +1,4 @@
-import React,{useState, useCallback} from 'react'
+import React,{useState, useCallback, useEffect} from 'react'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 import Users from './user/pages/Users'
@@ -12,6 +12,8 @@ import {AuthContext} from './shared/context/auth-context'
 const App =() => {
   const [token,setToken]= useState(false)
   const [userId, setUserId]= useState(false)
+
+
   
   const login = useCallback((uid,token) => {
     setToken(token) 
@@ -21,11 +23,18 @@ const App =() => {
       JSON.stringify({userId:uid, token:token})
     )
   },[])
-    
+
+   useEffect(() =>{
+    const storedData = JSON.parse(localstorage.getItem('userData'))
+    if(storedData && storedData.token){
+      login(storedData.userId, storedData.token)
+    }
+  },[login])
 
   const logout = useCallback(()=>{
     setToken(false)
     setUserId(null)
+    localStorage.removeItem('userData')
   },[])
 
   let routes
